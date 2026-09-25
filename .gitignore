@@ -1,0 +1,35 @@
+# macOS
+.DS_Store
+
+# C/C++ build products
+*.o
+*.obj
+*.a
+*.so
+*.dylib
+*.exe
+*.out
+*.dSYM/
+
+# Build directories and CMake-generated files
+build/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+Makefile
+
+# Generated ray-tracing images
+*.ppm
+
+# Executables built in the project root
+/main
+/OutputAnImage
+/outputAnImage
+
+# VS Code: keep the shared build task, ignore personal settings
+.vscode/*
+!.vscode/tasks.json
+!.vscode/extensions.json
+
