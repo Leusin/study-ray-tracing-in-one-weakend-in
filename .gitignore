@@ -20,9 +20,6 @@ cmake_install.cmake
 compile_commands.json
 Makefile
 
-# Generated ray-tracing images
-*.ppm
-
 # Executables built in the project root
 /main
 /OutputAnImage
@@ -32,4 +29,3 @@ Makefile
 .vscode/*
 !.vscode/tasks.json
 !.vscode/extensions.json
-
