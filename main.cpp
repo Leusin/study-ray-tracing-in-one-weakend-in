@@ -4,11 +4,25 @@
 
 #include <iostream>
 
-Color RayColor(const Ray& r)
+bool HitSphere(const Point3 &center, double radius, const Ray &r)
 {
+    Vec3 oc = center - r.Origin();
+    auto a = Dot(r.Direction(), r.Direction());
+    auto b = -2.0 * Dot(r.Direction(), oc);
+    auto c = Dot(oc, oc) - radius * radius;
+    auto discriminant = b * b - 4 * a * c;
+    return (discriminant >= 0);
+}
+
+Color RayColor(const Ray &r)
+{
+    if (HitSphere(Point3(0, 0, -1), 0.5, r))
+    {
+        return Color(1, 0, 0);
+    }
+
     Vector3 unitDirection = UnitVector(r.Direction());
     auto a = 0.5 * (unitDirection.Y() + 1); // 0.0 ~ 1.0
-    
     return (1.0 - a) * Color(1.0, 1.0, 1.0) + a * Color(0.5, 0.7, 1.0);
 }
 
@@ -32,12 +46,8 @@ int main()
     auto pixelDeltaU = viewportU / imageWidth;
     auto pixelDeltaV = viewportV / imageHeight;
 
-    auto viewportUpperLeft = cameraCenter 
-        - Vec3(0, 0, focalLength) 
-        - viewportU / 2 
-        - viewportV / 2;
-    auto pixel00Loc = viewportUpperLeft 
-        + 0.5 * (pixelDeltaU + pixelDeltaV); 
+    auto viewportUpperLeft = cameraCenter - Vec3(0, 0, focalLength) - viewportU / 2 - viewportV / 2;
+    auto pixel00Loc = viewportUpperLeft + 0.5 * (pixelDeltaU + pixelDeltaV);
 
     std::cout << "P3\n"
               << imageWidth << ' ' << imageHeight << "\n255\n";
@@ -45,11 +55,9 @@ int main()
     for (int j = 0; j < imageHeight; j++)
     {
         std::clog << "\nScanlines remaining: " << (imageHeight - j) << ' ' << std::flush;
-        for (int i =0;i <imageWidth; i++)
+        for (int i = 0; i < imageWidth; i++)
         {
-            auto pixelCenter = pixel00Loc 
-                + (i * pixelDeltaU) 
-                + (j * pixelDeltaV);
+            auto pixelCenter = pixel00Loc + (i * pixelDeltaU) + (j * pixelDeltaV);
             auto rayDirection = pixelCenter - cameraCenter;
             Ray r(cameraCenter, rayDirection);
 
