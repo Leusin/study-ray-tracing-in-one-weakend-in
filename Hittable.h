@@ -12,7 +12,7 @@ public:
         normal = bFrontFace ? outwardNormal : -outwardNormal;
     }
 
-    Point3 point;
+    Point point;
     Vec3 normal;
     double t;
     bool bFrontFace;

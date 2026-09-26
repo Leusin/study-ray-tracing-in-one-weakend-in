@@ -13,7 +13,7 @@ struct Vector3
     double Y() const { return E[1]; }
     double Z() const { return E[2]; }
     
-    Vector3 operator-() const { return Vector3(-E[0], -E[1], -E[0]);}
+    Vector3 operator-() const { return Vector3(-E[0], -E[1], -E[2]);}
     double operator[](int i) const { return E[i]; }
     double& operator[](int i) {return E[i]; }
 
@@ -53,7 +53,7 @@ struct Vector3
 typedef Vector3 Vec3;
 
 // 기하학적 명시를 위해 사용합니다.
-using Point3 = Vector3;
+using Point = Vector3;
 
 
 inline std::ostream& operator<<(std::ostream& out, const Vector3& v)

@@ -10,7 +10,7 @@
 
 #include <iostream>
 
-double HitSphere(const Point3 &center, double radius, const Ray &ray)
+double HitSphere(const Point &center, double radius, const Ray &ray)
 {
     Vec3 oc = center - ray.Origin();
     auto a = ray.Direction().LengthSquared();

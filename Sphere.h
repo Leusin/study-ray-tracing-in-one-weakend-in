@@ -7,7 +7,7 @@
 class Sphere : public Hittable
 {
 public:
-    Sphere(const Point3 &center, double radius)
+    Sphere(const Point &center, double radius)
         : mCenter(center), mRadius(std::fmax(0.0, radius))
     {
     }
@@ -53,7 +53,7 @@ public:
     }
 
 private:
-    Point3 mCenter;
+    Point mCenter;
     double mRadius;
 };
 
