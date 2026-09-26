@@ -83,7 +83,7 @@ inline Vector3 operator*(double t, const Vector3& v)
 
 inline Vector3 operator*(const Vector3& v, double t)
 {
-    t * v;
+    return t * v;
 }
 
 inline Vector3 operator/(const Vector3& v, double t)
