@@ -33,7 +33,7 @@ public:
         HitRecord &hitRecord) const override
     {
         HitRecord temporaryHitRecord;
-        bool bHitAnything = false;
+        bool isHitAnything = false;
         auto closestSoFar = rayT.Max;
 
         for (const auto& object : mObjects)
@@ -41,13 +41,13 @@ public:
             Interval currentRayT(rayT.Min, closestSoFar);
             if (object->Hit(ray, currentRayT, temporaryHitRecord))
             {
-                bHitAnything = true;
+                isHitAnything = true;
                 closestSoFar = temporaryHitRecord.T;
                 hitRecord = temporaryHitRecord;
             }
         }
         
-        return bHitAnything;
+        return isHitAnything;
     }
 
 private:

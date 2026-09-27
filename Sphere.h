@@ -2,13 +2,13 @@
 #define SPHERE_H
 
 #include "Hittable.h"
-#include "Vec3.h"
+#include <memory>
 
 class Sphere : public Hittable
 {
 public:
-    Sphere(const Point3 &center, double radius)
-        : mCenter(center), mRadius(std::fmax(0.0, radius))
+    Sphere(const Point3 &center, double radius, const std::shared_ptr<Material>& material)
+        : mCenter(center), mRadius(std::fmax(0.0, radius)), mMaterial(material)
     {
     }
 
@@ -48,12 +48,15 @@ public:
         auto outwardNormal = (hitRecord.Point - mCenter) / mRadius;
         hitRecord.SetFaceNormal(ray, outwardNormal);
 
+        hitRecord.Mat = mMaterial;
+
         return true;
     }
 
 private:
     Point3 mCenter;
     double mRadius;
+    std::shared_ptr<Material> mMaterial;
 };
 
 #endif

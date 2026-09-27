@@ -4,19 +4,22 @@
 #include "Ray.h"
 #include "Interval.h"
 
+class Material;
+
 class HitRecord
 {
 public:
     void SetFaceNormal(const Ray &ray, const Vec3 &outwardNormal)
     {
-        bFrontFace = Dot(ray.Direction(), outwardNormal) < 0;
-        Normal = bFrontFace ? outwardNormal : -outwardNormal;
+        IsFrontFace = Dot(ray.Direction(), outwardNormal) < 0.0;
+        Normal = IsFrontFace ? outwardNormal : -outwardNormal;
     }
 
     Point3 Point;
     Vec3 Normal;
+    std::shared_ptr<Material> Mat;
     double T;
-    bool bFrontFace;
+    bool IsFrontFace;
 };
 
 class Hittable

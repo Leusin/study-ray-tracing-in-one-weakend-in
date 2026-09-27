@@ -1,6 +1,6 @@
 # Happy Accidents
 
-버그지만 예뻐서 남겨둠.
+사고 기록
 
 ## 01. Accidental Pastel Eclipse
 
@@ -23,10 +23,10 @@
 #### 1. 화면의 Y축 반전
 
 ```cpp
-// 실수
+// 사고 현장
 auto viewportV = Vec3(0.0, viewportHeight, 0.0);
 
-// 의도
+// 원래 의도
 auto viewportV = Vec3(0.0, -viewportHeight, 0.0);
 ```
 
@@ -37,10 +37,10 @@ auto viewportV = Vec3(0.0, -viewportHeight, 0.0);
 #### 2. 법선 색상의 과노출
 
 ```cpp
-// 실수
+// 사고 현장
 return (0.5 * (hitRecord.Normal) + Color(1.0, 1.0, 1.0));
 
-// 의도
+// 원래 의도
 return 0.5 * ((hitRecord.Normal) + Color(1.0, 1.0, 1.0));
 ```
 
@@ -49,3 +49,27 @@ return 0.5 * ((hitRecord.Normal) + Color(1.0, 1.0, 1.0));
 의도한 식은 법선 성분 `[-1, 1]`을 색상 `[0, 1]`로 옮긴다.
 
 실제로 쓴 식은 `[0.5, 1.5]`를 만들었고, 1보다 큰 값이 `clamp`되면서 밝은 색이 하얗게 날아갔다.
+
+## 02. Accidental Sphere Fusion
+
+![Accidental Sphere Fusion](./02_Accidental_Sphere_Fusion.png)
+
+- 생성일: 2026-09-28
+- 해상도: 400 × 225
+- 원본 포맷: P3 PPM
+- 파일: [PNG](./02_Accidental_Sphere_Fusion.png) / [PPM](./02_Accidental_Sphere_Fusion.ppm)
+
+금속 구를 추가하다가 중앙 구와 오른쪽 구가 겹쳐버렸다.
+
+### 문제와 원인
+
+```cpp
+// 사고 현장
+world.Add(std::make_shared<Sphere>(Point3(0.0, 0.0, -1.2), 0.5, materialCenter));
+world.Add(std::make_shared<Sphere>(Point3(0.0, 0.0, -1.0), 0.5, materalRight));
+
+// 원래 의도
+world.Add(std::make_shared<Sphere>(Point3(1.0, 0.0, -1.0), 0.5, materalRight));
+```
+
+두 구의 X와 Y 좌표가 같고, Z축으로도 `0.2`밖에 떨어져 있지 않는 탓에 오른쪽 금속 구가 중앙 구와 겹쳐져 버렸다.

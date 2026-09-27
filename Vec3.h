@@ -71,6 +71,13 @@ public:
             RandomDouble(min, max));
     }
 
+    bool NearZero() const
+    {
+        auto threshold = 1e-8;
+
+        return (std::fabs(mElements[0]) < threshold) && (std::fabs(mElements[1]) < threshold) && (std::fabs(mElements[2]) < threshold);
+    }
+
 private:
     double mElements[3] = {};
 };
@@ -145,9 +152,9 @@ inline Vector3 RandomUnitVector()
     }
 }
 
-inline Vector3 RandomOnHemisphere(const Vector3& normal)
+inline Vector3 RandomOnHemisphere(const Vector3 &normal)
 {
-    Vector3 unitSphereDirection = RandomUnitVector();    
+    Vector3 unitSphereDirection = RandomUnitVector();
 
     if (Dot(unitSphereDirection, normal) > 0.0)
     {
@@ -155,6 +162,12 @@ inline Vector3 RandomOnHemisphere(const Vector3& normal)
     }
 
     return -unitSphereDirection;
+}
+
+inline Vec3 Reflect(const Vec3& v, const Vec3& n)
+{
+    // v + 2 b
+    return v - 2.0 * Dot(v, n) * n;
 }
 
 #endif
