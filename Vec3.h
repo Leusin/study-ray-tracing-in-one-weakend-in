@@ -129,4 +129,32 @@ inline Vector3 UnitVector(const Vector3 &v)
     return v / v.Length();
 }
 
+inline Vector3 RandomUnitVector()
+{
+    while (true)
+    {
+        auto p = Vector3::Random(-1.0, 1.0);
+        auto lengthSquared = p.LengthSquared();
+
+        // 0에 지나치게 가까우면 정규화 과정이 불안정해질 수 있어
+        // 1.0 * 10^-160 보다 작은지 함께 검사
+        if (1e-160 < lengthSquared && lengthSquared <= 1.0)
+        {
+            return p / std::sqrt(lengthSquared);
+        }
+    }
+}
+
+inline Vector3 RandomOnHemisphere(const Vector3& normal)
+{
+    Vector3 unitSphereDirection = RandomUnitVector();    
+
+    if (Dot(unitSphereDirection, normal) > 0.0)
+    {
+        return unitSphereDirection;
+    }
+
+    return -unitSphereDirection;
+}
+
 #endif

@@ -10,6 +10,7 @@ public:
     double AspectRatio = 1.0;
     int ImageWidth = 100;
     int SamplesPerPixel = 10;
+    int MaxDepth = 10;
 
     void Render(const Hittable &world)
     {
@@ -18,11 +19,11 @@ public:
         std::cout << "P3\n"
                   << ImageWidth << ' ' << mImageHeight << "\n255\n";
 
-        for (int scanlinlineIndex = 0; scanlinlineIndex < mImageHeight; scanlinlineIndex++)
+        for (int scanlineIndex = 0; scanlineIndex < mImageHeight; scanlineIndex++)
         {
             std::clog
                 << "\rScanlines remaining: "
-                << (mImageHeight - scanlinlineIndex)
+                << (mImageHeight - scanlineIndex)
                 << ' '
                 << std::flush;
 
@@ -32,8 +33,8 @@ public:
 
                 for (int sampleIndex = 0; sampleIndex < SamplesPerPixel; sampleIndex++)
                 {
-                    auto ray = GetRay(pixelIndex, scanlinlineIndex);
-                    pixelColor += RayColor(ray, world);
+                    auto ray = GetRay(pixelIndex, scanlineIndex);
+                    pixelColor += RayColor(ray, MaxDepth, world);
                 }
 
                 WriteColor(std::cout, mPixelSamplesScale * pixelColor);
@@ -87,13 +88,19 @@ private:
         return Vec3(RandomDouble() - 0.5, RandomDouble() - 0.5, 0.0);
     }
 
-    Color RayColor(const Ray &ray, const Hittable &world) const
+    Color RayColor(const Ray &ray, int depth, const Hittable &world) const
     {
+        if (depth <= 0)
+        {
+            return Color(0.0, 0.0, 0.0);
+        }
+
         HitRecord hitRecord;
 
-        if (world.Hit(ray, Interval(0.0, Infinity), hitRecord))
+        if (world.Hit(ray, Interval(0.001, Infinity), hitRecord))
         {
-            return 0.5 * ((hitRecord.Normal) + Color(1.0, 1.0, 1.0));
+            Vec3 direction = hitRecord.Normal + RandomUnitVector();
+            return 0.5 * RayColor(Ray(hitRecord.Point, direction), depth - 1, world);
         }
 
         Vec3 unitDirection = UnitVector(ray.Direction());

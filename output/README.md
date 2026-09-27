@@ -15,6 +15,11 @@
 | ![05. Multiple Objects](./5_MultipleObjects.png) | ![06. Antialiasing](./6_Antialiasing.png) |
 | [PNG](./5_MultipleObjects.png) / [PPM](./5_MultipleObjects.ppm) | [PNG](./6_Antialiasing.png) / [PPM](./6_Antialiasing.ppm) |
 
+| 07. Diffuse Material | 08. Gamma Correction |
+| :---: | :---: |
+| ![07. Diffuse Material](./7_DiffuseMaterial.png) | ![08. Gamma Correction](./8_GammaCorrection.png) |
+| [PNG](./7_DiffuseMaterial.png) / [PPM](./7_DiffuseMaterial.ppm) | [PNG](./8_GammaCorrection.png) / [PPM](./8_GammaCorrection.ppm) |
+
 ## Happy Accidents
 
 [→ Happy Accidents 갤러리](./happy-accidents/README.md)

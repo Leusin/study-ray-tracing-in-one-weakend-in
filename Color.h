@@ -8,11 +8,25 @@
 
 using Color = Vec3;
 
+inline double LinearToGamma(double linearComponent)
+{
+    if(linearComponent > 0.0)
+    {
+        return std::sqrt(linearComponent);
+    }
+
+    return 0.0;
+}
+
 void WriteColor(std::ostream &out, const Color &pixelColor)
 {
     auto red = pixelColor.X();
     auto green = pixelColor.Y();
     auto blue = pixelColor.Z();
+
+    red = LinearToGamma(red);
+    green = LinearToGamma(green);
+    blue = LinearToGamma(blue);
 
     static const Interval intensity(0.000, 0.999);
 

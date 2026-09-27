@@ -31,6 +31,7 @@ int main()
     camera.AspectRatio = 16.0 / 9.0;
     camera.ImageWidth = 400;
     camera.SamplesPerPixel = 100;
+    camera.MaxDepth = 50;
 
     camera.Render(world);
 
