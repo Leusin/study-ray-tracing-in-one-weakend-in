@@ -14,8 +14,7 @@ public:
 
     bool Hit(
         const Ray& ray,
-        double rayTMin,
-        double rayTMax,
+        const Interval& rayT,
         HitRecord& hitRecord
     ) const override
     {
@@ -34,10 +33,10 @@ public:
         auto squareRootDiscriminant = std::sqrt(discriminant);
 
         auto root = (h - squareRootDiscriminant) / a;
-        if (root <= rayTMin || rayTMax <= root)
+        if (!rayT.Contains(root))
         {
             root = (h + squareRootDiscriminant) / a;
-            if(root <= rayTMin || rayTMax <= root)
+            if(!rayT.Contains(root))
             {
                 return false;
             }

@@ -28,10 +28,10 @@ double HitSphere(const Point &center, double radius, const Ray &ray)
 
 Color RayColor(const Ray &ray, const Hittable& world)
 {
-    HitRecord HitRecord;
-    if (world.Hit(ray, 0.0, Infinity, HitRecord))
+    HitRecord hitRecord;
+    if (world.Hit(ray, Interval(0.0, Infinity), hitRecord))
     {
-        return 0.5 * (HitRecord.normal + Color(1.0, 1.0, 1.0));
+        return 0.5 * (hitRecord.normal + Color(1.0, 1.0, 1.0));
     }
 
     Vector3 unitDirection = UnitVector(ray.Direction());
@@ -48,14 +48,14 @@ int main()
     imageHeight = (imageHeight < 1) ? 1 : imageHeight;
 
     HittableList world;
-    world.Add(std::make_shared<Sphere>(Point3(0.0, 0.0, -1.0), 0.5));
-    world.Add(std::make_shared<Sphere>(Point3(0.0, -100.5, -1.0), 100.0));
+    world.Add(std::make_shared<Sphere>(Point(0.0, 0.0, -1.0), 0.5));
+    world.Add(std::make_shared<Sphere>(Point(0.0, -100.5, -1.0), 100.0));
 
     // camera
     auto focalLength = 1.0;
     auto viewportHeight = 2.0;
     auto viewportWidth = viewportHeight * (double(imageWidth) / imageHeight);
-    auto cameraCenter = Point3(0, 0, 0);
+    auto cameraCenter = Point(0, 0, 0);
 
     auto viewportU = Vec3(viewportWidth, 0, 0);
     auto viewportV = Vec3(0, -viewportHeight, 0);
