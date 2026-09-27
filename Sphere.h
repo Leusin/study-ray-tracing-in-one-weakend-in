@@ -7,7 +7,7 @@
 class Sphere : public Hittable
 {
 public:
-    Sphere(const Point &center, double radius)
+    Sphere(const Point3 &center, double radius)
         : mCenter(center), mRadius(std::fmax(0.0, radius))
     {
     }
@@ -42,17 +42,17 @@ public:
             }
         }
 
-        hitRecord.t = root;
-        hitRecord.point = ray.At(hitRecord.t);
+        hitRecord.T = root;
+        hitRecord.Point = ray.At(hitRecord.T);
         
-        auto outwardNormal = (hitRecord.point - mCenter) / mRadius;
+        auto outwardNormal = (hitRecord.Point - mCenter) / mRadius;
         hitRecord.SetFaceNormal(ray, outwardNormal);
 
         return true;
     }
 
 private:
-    Point mCenter;
+    Point3 mCenter;
     double mRadius;
 };
 

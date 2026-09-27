@@ -53,7 +53,7 @@ struct Vector3
 typedef Vector3 Vec3;
 
 // 기하학적 명시를 위해 사용합니다.
-using Point = Vector3;
+using Point3 = Vector3;
 
 
 inline std::ostream& operator<<(std::ostream& out, const Vector3& v)

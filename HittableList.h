@@ -42,7 +42,7 @@ public:
             if (object->Hit(ray, currentRayT, temporaryHitRecord))
             {
                 bHitAnything = true;
-                closestSoFar = temporaryHitRecord.t;
+                closestSoFar = temporaryHitRecord.T;
                 hitRecord = temporaryHitRecord;
             }
         }

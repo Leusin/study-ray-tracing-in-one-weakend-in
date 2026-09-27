@@ -10,12 +10,12 @@ public:
     void SetFaceNormal(const Ray &ray, const Vec3 &outwardNormal)
     {
         bFrontFace = Dot(ray.Direction(), outwardNormal) < 0;
-        normal = bFrontFace ? outwardNormal : -outwardNormal;
+        Normal = bFrontFace ? outwardNormal : -outwardNormal;
     }
 
-    Point point;
-    Vec3 normal;
-    double t;
+    Point3 Point;
+    Vec3 Normal;
+    double T;
     bool bFrontFace;
 };
 
