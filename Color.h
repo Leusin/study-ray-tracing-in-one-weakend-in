@@ -2,22 +2,25 @@
 #define COLOR_H
 
 #include "Vec3.h"
+#include "Interval.h"
 
 #include <iostream>
 
 using Color = Vec3;
 
-void WriteColor(std::ostream& out, const Color& pixelColor)
+void WriteColor(std::ostream &out, const Color &pixelColor)
 {
-    auto r = pixelColor.X();
-    auto g = pixelColor.Y();
-    auto b = pixelColor.Z();
+    auto red = pixelColor.X();
+    auto green = pixelColor.Y();
+    auto blue = pixelColor.Z();
 
-    int rByte = int(255.999 * r);
-    int gByte = int(255.999 * g);
-    int bByte = int(255.999 * b);
+    static const Interval intensity(0.000, 0.999);
 
-    out << rByte << ' ' << gByte << ' ' << bByte << '\n';
+    int redByte = static_cast<int>(256.0 * intensity.Clamp(red));
+    int greenByte = static_cast<int>(256.0 * intensity.Clamp(green));
+    int blueByte = static_cast<int>(256.0 * intensity.Clamp(blue));
+
+    out << redByte << ' ' << greenByte << ' ' << blueByte << '\n';
 }
 
 #endif

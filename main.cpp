@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-Color RayColor(const Ray &ray, const Hittable& world)
+Color RayColor(const Ray &ray, const Hittable &world)
 {
     HitRecord hitRecord;
     if (world.Hit(ray, Interval(0.0, Infinity), hitRecord))
@@ -17,7 +17,7 @@ Color RayColor(const Ray &ray, const Hittable& world)
 
     Vector3 unitDirection = UnitVector(ray.Direction());
     auto a = 0.5 * (unitDirection.Y() + 1.0); // 0.0 ~ 1.0
-    
+
     return (1.0 - a) * Color(1.0, 1.0, 1.0) + a * Color(0.5, 0.7, 1.0);
 }
 
@@ -30,6 +30,7 @@ int main()
     Camera camera;
     camera.AspectRatio = 16.0 / 9.0;
     camera.ImageWidth = 400;
+    camera.SamplesPerPixel = 100;
 
     camera.Render(world);
 
