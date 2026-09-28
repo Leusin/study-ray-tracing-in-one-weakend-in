@@ -28,26 +28,35 @@ int main()
 {
     HittableList world;
 
-    auto materialGround = std::make_shared<Lambertian>(Color(0.8, 0.8, 0.0));
-    auto materialCenter = std::make_shared<Lambertian>(Color(0.1, 0.2, 0.5));
-    auto materalLeft = std::make_shared<Dielectric>(1.50);
-    auto materalBubble = std::make_shared<Dielectric>(1.0 / 1.33);
-    auto materalRight = std::make_shared<Metal>(Color(0.8, 0.6, 0.2), 1.0);
+    {
+        auto r = std::cos(Pi / 4);
+        auto materalLeft = std::make_shared<Lambertian>(Color(0.0, 0.0, 1.0));
+        auto materalRight = std::make_shared<Lambertian>(Color(1.0, 0.0, 0.0));
+        world.Add(std::make_shared<Sphere>(Point3(-r, 0.0, -1.0), r, materalLeft));
+        world.Add(std::make_shared<Sphere>(Point3(r, 0.0, -1.0), r, materalRight));
+    }
 
-    world.Add(std::make_shared<Sphere>(Point3(0.0, -100.5, -1.0), 100.0, materialGround));
+    // auto materialGround = std::make_shared<Lambertian>(Color(0.8, 0.8, 0.0));
+    // auto materialCenter = std::make_shared<Lambertian>(Color(0.1, 0.2, 0.5));
+    // auto materalLeft = std::make_shared<Dielectric>(1.50);
+    // auto materalBubble = std::make_shared<Dielectric>(1.0 / 1.33);
+    // auto materalRight = std::make_shared<Metal>(Color(0.8, 0.6, 0.2), 1.0);
 
-    world.Add(std::make_shared<Sphere>(Point3(0.0, 0.0, -1.2), 0.5, materialCenter));
+    // world.Add(std::make_shared<Sphere>(Point3(0.0, -100.5, -1.0), 100.0, materialGround));
+
+    // world.Add(std::make_shared<Sphere>(Point3(0.0, 0.0, -1.2), 0.5, materialCenter));
     
-    world.Add(std::make_shared<Sphere>(Point3(-1.0, 0.0, -1.0), 0.5, materalLeft));
-    world.Add(std::make_shared<Sphere>(Point3(-1.0, 0.0, -1.0), 0.4, materalBubble));
+    // world.Add(std::make_shared<Sphere>(Point3(-1.0, 0.0, -1.0), 0.5, materalLeft));
+    // world.Add(std::make_shared<Sphere>(Point3(-1.0, 0.0, -1.0), 0.4, materalBubble));
     
-    world.Add(std::make_shared<Sphere>(Point3(1.0, 0.0, -1.0), 0.5, materalRight));
+    // world.Add(std::make_shared<Sphere>(Point3(1.0, 0.0, -1.0), 0.5, materalRight));
 
     Camera camera;
     camera.AspectRatio = 16.0 / 9.0;
     camera.ImageWidth = 400;
     camera.SamplesPerPixel = 100;
     camera.MaxDepth = 50;
+    camera.VFov = 90;
 
     camera.Render(world);
 

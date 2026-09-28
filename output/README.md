@@ -24,6 +24,10 @@
 | :---: | :---: |
 | ![11. Total Internal Reflection](./11_TotalInternalReflection.png) | ![12. Hollow Glass Sphere](./12_HollowGlassSphere.png) |
 
+| 13. Vertical Field of View |
+| :---: |
+| ![13. Vertical Field of View](./13_VerticalFieldOfView.png) |
+
 ## Happy Accidents
 
 [사고 기록 자세히 보기](./happy-accidents/README.md)

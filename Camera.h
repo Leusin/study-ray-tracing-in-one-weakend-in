@@ -13,6 +13,8 @@ public:
     int SamplesPerPixel = 10;
     int MaxDepth = 10;
 
+    double VFov = 90;
+
     void Render(const Hittable &world)
     {
         Initialize();
@@ -56,7 +58,9 @@ private:
         mCenter = Point3(0.0, 0.0, 0.0);
 
         auto focalLength = 1.0;
-        auto viewportHeight = 2.0;
+        auto theta = DegreesToRadians(VFov);
+        auto h = std::tan(theta / 2.0);
+        auto viewportHeight = 2.0 * h * focalLength;
         auto viewportWidth = viewportHeight * (static_cast<double>(ImageWidth) / static_cast<double>(mImageHeight));
 
         auto viewportU = Vec3(viewportWidth, 0.0, 0.0);
