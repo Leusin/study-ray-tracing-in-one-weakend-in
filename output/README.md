@@ -16,9 +16,9 @@
 | :---: | :---: |
 | ![07. Diffuse Material](./7_DiffuseMaterial.png) | ![08. Gamma Correction](./8_GammaCorrection.png) |
 
-| 09. Metal |
-| :---: |
-| ![09. Metal](./9_Metal.png) |
+| 09. Metal | 10. Dielectric |
+| :---: | :---: |
+| ![09. Metal](./9_Metal.png) | ![10. Dielectric](./10_Dielectric.png) |
 
 ## Happy Accidents
 

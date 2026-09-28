@@ -170,4 +170,22 @@ inline Vec3 Reflect(const Vec3& v, const Vec3& n)
     return v - 2.0 * Dot(v, n) * n;
 }
 
+/// @brief 정규화된 입사 광선의 굴절 방향을 계산한다.
+/// @param uv 입사 광선 방향
+/// @param n 입사 광선의 반대 쪽을 향하는 법선
+/// @param etaInOverEtaOut 입사 매질 굴절률 / 출사 매질 굴절률
+/// @return 정규화된 굴절 광선 방향
+inline Vec3 Refract(const Vec3& uv, const Vec3& n, double etaInOverEtaOut)
+{
+    const double cosTheta = std::fmin(Dot(-uv, n), 1.0);
+
+    // n 에 수직인 성분
+    const auto refractPerpendicular = etaInOverEtaOut * (uv + cosTheta * n);
+
+    // n 과 평행한 성분
+    const auto refractParallel = -std::sqrt(std::fabs(1.0 - refractPerpendicular.LengthSquared())) * n;
+
+    return refractPerpendicular + refractParallel;
+}
+
 #endif

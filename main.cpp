@@ -4,6 +4,7 @@
 #include "Hittable.h"
 #include "HittableList.h"
 #include "Lambertian.h"
+#include "Dielectric.h"
 #include "Metal.h"
 #include "Sphere.h"
 
@@ -29,7 +30,7 @@ int main()
 
     auto materialGround = std::make_shared<Lambertian>(Color(0.8, 0.8, 0.0));
     auto materialCenter = std::make_shared<Lambertian>(Color(0.1, 0.2, 0.5));
-    auto materalLeft = std::make_shared<Metal>(Color(0.8, 0.8, 0.8), 0.3);
+    auto materalLeft = std::make_shared<Dielectric>(1.50);
     auto materalRight = std::make_shared<Metal>(Color(0.8, 0.6, 0.2), 1.0);
 
     world.Add(std::make_shared<Sphere>(Point3(0.0, -100.5, -1.0), 100.0, materialGround));
