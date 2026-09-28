@@ -24,9 +24,9 @@
 | :---: | :---: |
 | ![11. Total Internal Reflection](./11_TotalInternalReflection.png) | ![12. Hollow Glass Sphere](./12_HollowGlassSphere.png) |
 
-| 13. Vertical Field of View |
-| :---: |
-| ![13. Vertical Field of View](./13_VerticalFieldOfView.png) |
+| 13. Vertical Field of View | 14. Positionable Camera |
+| :---: | :---: |
+| ![13. Vertical Field of View](./13_VerticalFieldOfView.png) | ![14. Positionable Camera](./14_PositionableCamera.png) |
 
 ## Happy Accidents
 
@@ -35,3 +35,7 @@
 | 01. Accidental Pastel Eclipse | 02. Accidental Sphere Fusion |
 | :---: | :---: |
 | [![01. Accidental Pastel Eclipse](./happy-accidents/01_Accidental_Pastel_Eclipse.png)](./happy-accidents/README.md) | [![02. Accidental Sphere Fusion](./happy-accidents/02_Accidental_Sphere_Fusion.png)](./happy-accidents/README.md) |
+
+| 03. Split-Brain Camera |
+| :---: |
+| [![03. Split-Brain Camera](./happy-accidents/03_Split_Brain_Camera.png)](./happy-accidents/README.md) |

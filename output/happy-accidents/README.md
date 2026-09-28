@@ -73,3 +73,48 @@ world.Add(std::make_shared<Sphere>(Point3(1.0, 0.0, -1.0), 0.5, materalRight));
 ```
 
 두 구의 X와 Y 좌표가 같고, Z축으로도 `0.2`밖에 떨어져 있지 않는 탓에 오른쪽 금속 구가 중앙 구와 겹쳐져 버렸다.
+
+## 03. Split-Brain Camera
+
+![Split-Brain Camera](./03_Split_Brain_Camera.png)
+
+- 생성일: 2026-09-28
+- 해상도: 400 × 225
+- 원본 포맷: P3 PPM
+- 파일: [PNG](./03_Split_Brain_Camera.png) / [PPM](./03_Split_Brain_Camera.ppm)
+
+카메라 이동을 구현하던 중, 예전 카메라 계산을 일부 남겨둬서 만들어진 이미지.
+
+### 문제와 원인
+
+Camera.Initialize 에서 초기화 문제가 있었다
+
+#### 1. ray의 출발점 초기화 문제
+
+```cpp
+// 사고 현장
+mCenter = Point3(0.0, 0.0, 0.0);
+
+// 원래 의도
+mCenter = Lookfrom;
+```
+
+`GetRay()`는 `mCenter`를 광선의 출발점으로 사용하기 때문에, `Lookfrom`을 바꿔도 실제 광선은 계속 원점에서 출발했다.
+
+#### 2. 서로 다른 기준으로 계산한 viewport
+
+```cpp
+// 사고 현장
+auto viewportUpperLeft =
+    mCenter - Vec3(0.0, 0.0, focalLength)
+    - viewportU / 2.0
+    - viewportV / 2.0;
+
+// 원래 의도
+auto viewportUpperLeft =
+    mCenter - (focalLength * w)
+    - viewportU / 2.0
+    - viewportV / 2.0;
+```
+
+viewport의 가로와 세로는 새 카메라 축인 `u`, `v`로 계산했지만, 중심은 월드 좌표의 `-Z` 방향에 놓아져 있었기 때문에 방향과 위치의 기준이 서로 달라졌다.
