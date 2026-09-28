@@ -28,6 +28,10 @@
 | :---: | :---: |
 | ![13. Vertical Field of View](./13_VerticalFieldOfView.png) | ![14. Positionable Camera](./14_PositionableCamera.png) |
 
+| 15. Defocus Blur |
+| :---: |
+| ![15. Defocus Blur](./15_DefocusBlur.png) |
+
 ## Happy Accidents
 
 [사고 기록 자세히 보기](./happy-accidents/README.md)

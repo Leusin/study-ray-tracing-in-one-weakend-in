@@ -62,6 +62,9 @@ int main()
     camera.Lookat = Point3(0.0, 0.0, -1.0);
     camera.VUp = Vec3(0.0, 1.0, 0.0);
 
+    camera.DefocusAngle = 10.0;
+    camera.FocusDist = 3.4;
+    
     camera.Render(world);
 
     return 0;

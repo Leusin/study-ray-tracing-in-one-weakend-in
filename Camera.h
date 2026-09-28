@@ -18,6 +18,9 @@ public:
     Point3 Lookat = Point3(0.0, 0.0, 1.0);
     Vec3 VUp = Vec3(0.0, 1.0, 0.0);
 
+    double DefocusAngle = 0;
+    double FocusDist = 10;
+
     void Render(const Hittable &world)
     {
         Initialize();
@@ -55,15 +58,14 @@ private:
     {
         mImageHeight = static_cast<int>(ImageWidth / AspectRatio);
         mImageHeight = (mImageHeight < 1) ? 1 : mImageHeight;
-
         mPixelSamplesScale = 1.0 / static_cast<double>(SamplesPerPixel);
 
         mCenter = Lookfrom;
 
-        auto focalLength = (Lookfrom - Lookat).Length();
+        auto focusDist = (Lookfrom - Lookat).Length();
         auto theta = DegreesToRadians(VFov);
         auto h = std::tan(theta / 2.0);
-        auto viewportHeight = 2.0 * h * focalLength;
+        auto viewportHeight = 2.0 * h * focusDist;
         auto viewportWidth = viewportHeight * (static_cast<double>(ImageWidth) / static_cast<double>(mImageHeight));
 
         w = UnitVector(Lookfrom - Lookat);
@@ -77,9 +79,14 @@ private:
         mPixelDeltaV = viewportV / mImageHeight;
 
         auto viewportUpperLeft =
-            mCenter - (focalLength * w) - viewportU / 2.0 - viewportV / 2.0;
+            mCenter - (focusDist * w) - viewportU / 2.0 - viewportV / 2.0;
 
         mPixel00Location = viewportUpperLeft + 0.5 * (mPixelDeltaU + mPixelDeltaV);
+
+        const double defocusRadius = focusDist * std::tan(DegreesToRadians(DefocusAngle * 0.5));
+
+        mDefocusDiskU = u * defocusRadius;
+        mDefocusDiskV = v * defocusRadius;
     }
 
     Ray GetRay(int pixelIndex, int scanlineIndex) const
@@ -89,7 +96,7 @@ private:
         auto pixelSample =
             mPixel00Location + ((pixelIndex + offset.X()) * mPixelDeltaU) + ((scanlineIndex + offset.Y()) * mPixelDeltaV);
 
-        auto rayOrigin = mCenter;
+        auto rayOrigin = (DefocusAngle <= 0.0) ? mCenter : DefocusDisSample();
         auto rayDirection = pixelSample - rayOrigin;
 
         return Ray(rayOrigin, rayDirection);
@@ -98,6 +105,12 @@ private:
     Vec3 SampleSquare() const
     {
         return Vec3(RandomDouble() - 0.5, RandomDouble() - 0.5, 0.0);
+    }
+
+    Point3 DefocusDisSample() const
+    {
+        const Vec3 point = RandomUnitVector();
+        return mCenter + (point.X() * mDefocusDiskU + (point.Y() * mDefocusDiskV));
     }
 
     Color RayColor(const Ray &ray, int depth, const Hittable &world) const
@@ -129,12 +142,16 @@ private:
 
 private:
     int mImageHeight = 0;
-    double mPixelSamplesScale = 1.0;
     Point3 mCenter;
     Point3 mPixel00Location;
     Vec3 mPixelDeltaU;
     Vec3 mPixelDeltaV;
     Vec3 u, v, w;
+
+    double mPixelSamplesScale = 1.0;
+
+    Vec3 mDefocusDiskU;
+    Vec3 mDefocusDiskV;
 };
 
 #endif
