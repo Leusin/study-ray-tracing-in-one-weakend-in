@@ -20,6 +20,10 @@
 | :---: | :---: |
 | ![09. Metal](./9_Metal.png) | ![10. Dielectric](./10_Dielectric.png) |
 
+| 11. Total Internal Reflection |
+| :---: |
+| ![11. Total Internal Reflection](./11_TotalInternalReflection.png) |
+
 ## Happy Accidents
 
 [사고 기록 자세히 보기](./happy-accidents/README.md)
