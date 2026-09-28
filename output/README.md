@@ -20,9 +20,9 @@
 | :---: | :---: |
 | ![09. Metal](./9_Metal.png) | ![10. Dielectric](./10_Dielectric.png) |
 
-| 11. Total Internal Reflection |
-| :---: |
-| ![11. Total Internal Reflection](./11_TotalInternalReflection.png) |
+| 11. Total Internal Reflection | 12. Hollow Glass Sphere |
+| :---: | :---: |
+| ![11. Total Internal Reflection](./11_TotalInternalReflection.png) | ![12. Hollow Glass Sphere](./12_HollowGlassSphere.png) |
 
 ## Happy Accidents
 
