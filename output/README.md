@@ -32,6 +32,10 @@
 | :---: |
 | ![15. Defocus Blur](./15_DefocusBlur.png) |
 
+| 16. Final Render |
+| :---: |
+| ![16. Final Render](./16_FinalRender.png) |
+
 ## Happy Accidents
 
 [사고 기록 자세히 보기](./happy-accidents/README.md)
@@ -40,6 +44,6 @@
 | :---: | :---: |
 | [![01. Accidental Pastel Eclipse](./happy-accidents/01_Accidental_Pastel_Eclipse.png)](./happy-accidents/README.md) | [![02. Accidental Sphere Fusion](./happy-accidents/02_Accidental_Sphere_Fusion.png)](./happy-accidents/README.md) |
 
-| 03. Split-Brain Camera |
-| :---: |
-| [![03. Split-Brain Camera](./happy-accidents/03_Split_Brain_Camera.png)](./happy-accidents/README.md) |
+| 03. Split-Brain Camera | 04. Defocus Fever Dream |
+| :---: | :---: |
+| [![03. Split-Brain Camera](./happy-accidents/03_Split_Brain_Camera.png)](./happy-accidents/README.md) | [![04. Defocus Fever Dream](./happy-accidents/04_Defocus_Fever_Dream.png)](./happy-accidents/README.md) |

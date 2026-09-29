@@ -118,3 +118,14 @@ auto viewportUpperLeft =
 ```
 
 viewport의 가로와 세로는 새 카메라 축인 `u`, `v`로 계산했지만, 중심은 월드 좌표의 `-Z` 방향에 놓아져 있었기 때문에 방향과 위치의 기준이 서로 달라졌다.
+
+## 04. Defocus Fever Dream
+
+![Defocus Fever Dream](./04_Defocus_Fever_Dream.png)
+
+- 생성일: 2026-09-28
+- 해상도: 400 × 225
+- 원본 포맷: P3 PPM
+- 파일: [PNG](./04_Defocus_Fever_Dream.png) / [PPM](./04_Defocus_Fever_Dream.ppm)
+
+최종 장면을 만들면서 이전 장면의 카메라 설정을 그대로 사용해서 만들어진 이미지.
